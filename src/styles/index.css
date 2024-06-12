@@ -1,14 +1,20 @@
+:root {
+  --clr-beige: #EBECD0;
+  --clr-brown-dark: #302E2B;
+  --clr-brown-light: #5F5C56; 
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #302E2B;
+  background-color: var(--clr-brown-dark);
 }
 
 .calculator {
   width: 440px;
   height: 690px;
-  background-color: #5F5C56;
+  background-color: var(--clr-brown-light);
   border-radius: 15px;
 }
