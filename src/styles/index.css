@@ -1,4 +1,9 @@
 :root {
+  --clr-black: #222831;
+  --clr-gray-dark: #31363F;
+  --clr-gray-light: #EEEEEE;
+  --clr-teal: #76ABAE;
+
   --clr-purple-dark: #2D3250;
   --clr-purple-medium: #424769;
   --clr-purple-light: #7077A1;
@@ -16,12 +21,35 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: var(--clr-purple-dark);
+  background-color: var(--clr-black);
 }
 
 .calculator {
-  width: 400px;
-  height: 690px;
+  width: 380px;
+  height: 650px;
   border-radius: 15px;
-  background-color: var(--clr-purple-medium);
+  background-color: var(--clr-teal);
+  padding: 1rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+.content__display {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 10rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--clr-gray-dark);
+  border-radius: 10px;
+}
+  
+.content__display__text {    
+  font-size: 3.2rem;
+  font-family: sans-serif;
+  color: var(--clr-gray-light);
 }
