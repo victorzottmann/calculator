@@ -1,0 +1,27 @@
+:root {
+  --clr-purple-dark: #2D3250;
+  --clr-purple-medium: #424769;
+  --clr-purple-light: #7077A1;
+  --clr-yellow: #F6B17A;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--clr-purple-dark);
+}
+
+.calculator {
+  width: 400px;
+  height: 690px;
+  border-radius: 15px;
+  background-color: var(--clr-purple-medium);
+}
