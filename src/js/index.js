@@ -17,9 +17,9 @@ displayText.classList.add("content__display__text");
 displayText.textContent = "100,000,000";
 display.appendChild(displayText);
 
-const buttons = document.createElement("div");
-buttons.classList.add("content__buttons");
-content.appendChild(buttons);
+const buttonsContainer = document.createElement("div");
+buttonsContainer.classList.add("content__buttons");
+content.appendChild(buttonsContainer);
 
 
 // FIRST ROW
@@ -50,7 +50,6 @@ firstRow.appendChild(divideBtn);
 // SECOND ROW
 const secondRow = document.createElement("div");
 secondRow.classList.add("content__buttons__row");
-buttons.appendChild(secondRow);
 
 const sevenBtn = document.createElement("button");
 sevenBtn.classList.add("btn");
@@ -75,7 +74,6 @@ secondRow.appendChild(timesBtn);
 // THIRD ROW
 const thirdRow = document.createElement("div");
 thirdRow.classList.add("content__buttons__row");
-buttons.appendChild(thirdRow);
 
 const fourBtn = document.createElement("button");
 fourBtn.classList.add("btn");
@@ -101,7 +99,6 @@ thirdRow.appendChild(minusBtn);
 // FOURTH ROW
 const fourthRow = document.createElement("div");
 fourthRow.classList.add("content__buttons__row");
-buttons.appendChild(fourthRow);
 
 const oneBtn = document.createElement("button");
 oneBtn.classList.add("btn");
@@ -127,7 +124,6 @@ fourthRow.appendChild(plusBtn);
 // FITH ROW
 const fifthRow = document.createElement("div");
 fifthRow.classList.add("content__buttons__row");
-buttons.appendChild(fifthRow);
 
 const zeroBtn = document.createElement("button");
 zeroBtn.classList.add("btn");
@@ -145,9 +141,8 @@ equalsBtn.classList.add("btn-equals");
 equalsBtn.textContent = "=";
 fifthRow.appendChild(equalsBtn);
 
-
-buttons.appendChild(firstRow);
-buttons.appendChild(secondRow);
-buttons.appendChild(thirdRow);
-buttons.appendChild(fourthRow);
-buttons.appendChild(fifthRow);
+buttonsContainer.appendChild(firstRow);
+buttonsContainer.appendChild(secondRow);
+buttonsContainer.appendChild(thirdRow);
+buttonsContainer.appendChild(fourthRow);
+buttonsContainer.appendChild(fifthRow);
