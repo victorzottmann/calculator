@@ -76,7 +76,7 @@ body {
   color: var(--clr-gray-dark);
 }
   
-.btn:not(.btn-equals) {
+.btn:not(#equals) {
   aspect-ratio: 1 / 1;
   flex: 1 1 25%; 
   border-radius: 50%;
@@ -86,7 +86,7 @@ body {
   background-color: var(--clr-hover);
 }
 
-.btn-equals {
+#equals {
   border-radius: 100px;
   flex-basis: calc(50% + 1.1rem);
 }

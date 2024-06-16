@@ -87,7 +87,7 @@ fifthRow.classList.add("content__buttons__row");
 
 const zeroBtn = createButton("0", "btn");
 const dotBtn = createButton(".", "btn");
-const equalsBtn = createButton("=", ["btn", "btn-operation", "btn-equals"]);
+const equalsBtn = createButton("=", ["btn", "btn-operation"], "equals");
 
 fifthRow.appendChild(zeroBtn);
 fifthRow.appendChild(dotBtn);
