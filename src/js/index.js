@@ -104,13 +104,25 @@ function handleClick() {
 
   buttons.forEach(b => {
     b.addEventListener("click", (e) => {
-      buttonClicked = e.target;
+      const buttonClicked = e.target;
       const isOperationButton = buttonClicked.classList.contains("btn-operation");
-  
+      const isNumberButton = !isOperationButton;
+
+      if (isNumberButton) {
+        if (!data.operator.clicked) {
+          data.first += buttonClicked.textContent;
+        } else {
+          data.second += buttonClicked.textContent;
+        }
+      }
+
       if (isOperationButton) {
         const operation = buttonClicked.textContent.toLowerCase();
+        data.operator.clicked = true;
         processOperation(operation);
       }
+
+      updateDisplay();
     });
   });
 }

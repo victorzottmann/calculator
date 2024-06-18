@@ -48,3 +48,22 @@ export function processOperation(operation) {
       break;
   }
 }
+
+function calculate(a, b, selection) {
+  const x = Number(a);
+  const y = Number(b);
+
+  const operations = {
+    add: () => x + y,
+    subtract: () => x - y,
+    multiply: () => x * y,
+    divide: () => {
+      if (x === 0 || y === 0) {
+        throw new Error("Cannot divide my zero!");
+      }
+      return x / y;
+    } 
+  };
+
+  return operations[selection];
+}
