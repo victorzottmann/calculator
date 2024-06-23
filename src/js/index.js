@@ -1,6 +1,4 @@
-import { createButton, processOperation } from "./utils.js";
-
-let buttonClicked = null;
+import { createButton, operate } from "./utils.js";
 
 const root = document.querySelector("#root");
 
@@ -98,33 +96,3 @@ buttonsContainer.appendChild(secondRow);
 buttonsContainer.appendChild(thirdRow);
 buttonsContainer.appendChild(fourthRow);
 buttonsContainer.appendChild(fifthRow);
-
-function handleClick() {
-  const buttons = document.querySelectorAll(".btn");
-
-  buttons.forEach(b => {
-    b.addEventListener("click", (e) => {
-      const buttonClicked = e.target;
-      const isOperationButton = buttonClicked.classList.contains("btn-operation");
-      const isNumberButton = !isOperationButton;
-
-      if (isNumberButton) {
-        if (!data.operator.clicked) {
-          data.first += buttonClicked.textContent;
-        } else {
-          data.second += buttonClicked.textContent;
-        }
-      }
-
-      if (isOperationButton) {
-        const operation = buttonClicked.textContent.toLowerCase();
-        data.operator.clicked = true;
-        processOperation(operation);
-      }
-
-      updateDisplay();
-    });
-  });
-}
-
-handleClick();
