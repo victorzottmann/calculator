@@ -30,13 +30,13 @@ firstRow.classList.add("content__buttons__row");
 
 const acBtn = createButton("AC", ["btn", "btn-operation"]);
 const delBtn = createButton("DEL", ["btn", "btn-operation"]);
-const percentBtn = createButton("%", ["btn", "btn-operation"]);
+const plusMinusBtn = createButton("±", ["btn", "btn-operation"]);
 const divideBtn = createButton("÷", ["btn", "btn-operation"]);
 divideBtn.dataset.operator = "÷";
 
 firstRow.appendChild(acBtn);
 firstRow.appendChild(delBtn);
-firstRow.appendChild(percentBtn);
+firstRow.appendChild(plusMinusBtn);
 firstRow.appendChild(divideBtn);
 
 // SECOND ROW
@@ -88,9 +88,9 @@ fourthRow.appendChild(plusBtn);
 const fifthRow = document.createElement("div");
 fifthRow.classList.add("content__buttons__row");
 
-const zeroBtn = createButton("0", "btn");
+const zeroBtn = createButton("0", "btn", "equals");
 const dotBtn = createButton(".", "btn");
-const equalsBtn = createButton("=", ["btn", "btn-operation"], "equals");
+const equalsBtn = createButton("=", ["btn", "btn-operation"]);
 equalsBtn.dataset.operator = "=";
 
 fifthRow.appendChild(zeroBtn);
@@ -139,7 +139,7 @@ function handleClick() {
         data.operator.clicked = true;
         data.result += data.operator.type;
         updateDisplay();
-      } else if (buttonText == "=") {
+      }  else if (buttonText == "=") {
         operate(data.firstNumber, data.secondNumber, data.operator.type);
         data.operator.clicked = false;
       }
