@@ -1,4 +1,4 @@
-export function createButton(text, classes, id = null) {
+export function createButton(value, classes, id = null) {
   const button = document.createElement("button");
 
   if (classes) {
@@ -13,6 +13,6 @@ export function createButton(text, classes, id = null) {
     button.id = id;
   }
 
-  button.textContent = text;
+  button.textContent = value;
   return button;
 }

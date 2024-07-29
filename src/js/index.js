@@ -43,8 +43,11 @@ const secondRow = document.createElement("div");
 secondRow.classList.add("content__buttons__row");
 
 const sevenBtn = createButton("7", "btn");
+sevenBtn.dataset.number = "7";
 const eightBtn = createButton("8", "btn");
+eightBtn.dataset.number = "8";
 const nineBtn = createButton("9", "btn");
+nineBtn.dataset.number = "9";
 const timesBtn = createButton("x", ["btn", "btn-operation"]);
 timesBtn.dataset.operator = "*";
 
@@ -58,8 +61,11 @@ const thirdRow = document.createElement("div");
 thirdRow.classList.add("content__buttons__row");
 
 const fourBtn = createButton("4", "btn");
+fourBtn.dataset.number = "4";
 const fiveBtn = createButton("5", "btn");
+fiveBtn.dataset.number = "5";
 const sixBtn = createButton("6", "btn");
+sixBtn.dataset.number = "6";
 const minusBtn = createButton("-", ["btn", "btn-operation"]);
 minusBtn.dataset.operator = "-";
 
@@ -73,8 +79,11 @@ const fourthRow = document.createElement("div");
 fourthRow.classList.add("content__buttons__row");
 
 const oneBtn = createButton("1", "btn");
+oneBtn.dataset.number = "1";
 const twoBtn = createButton("2", "btn");
+twoBtn.dataset.number = "2";
 const threeBtn = createButton("3", "btn");
+threeBtn.dataset.number = "3";
 const plusBtn = createButton("+", ["btn", "btn-operation"]);
 plusBtn.dataset.operator = "+";
 
@@ -104,29 +113,48 @@ buttonsContainer.appendChild(fifthRow);
 
 // ================================================================ //
 
-let firstNumber;
 let operation;
-let secondNumber;
 
-function add(num1, num2) {
-  return Number(num1) + Number(num2);
+const data = {
+  firstNumber: null,
+  secondNumber: null,
+  operator: {
+    type: "",
+    clicked: false,
+  },
+  result: "",
 }
 
-function subtract(num1, num2) {
-  return Number(num1) - Number(num2);
+function handleClick() {
+  const numberButtons = document.querySelectorAll("[data-number]");
+
+  numberButtons.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      let number = e.target.textContent;
+
+      if (!data.operator.clicked) {
+        data.firstNumber += number;
+        console.log("First number:", data.firstNumber);
+      } else {
+        data.operator.clicked = true;
+        data.secondNumber += number;
+        console.log("Second number:", data.secondNumber);
+      }
+    });
+  });
+
+  const operationButtons = document.querySelectorAll("[data-operator]");
+  operationButtons.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      let operator = e.target.textContent;
+
+      if (data.firstNumber && !data.operator.clicked) {
+        data.operator.type = operator;
+        data.operator.clicked = true;
+        console.log("Operator:", data.operator.type);
+      }
+    });
+  });
 }
 
-function multiply(num1, num2) {
-  return Number(num1) * Number(num2);
-}
-
-function divide(num1, num2) {
-  if (num1 == 0 || num2 == 0) {
-    throw new Error("Cannot divide by zero!");
-  }
-  return Number(num1) / Number(num2);
-}
-
-function operate(operator, num1, num2) {
-  return operator(num1, num2);
-}
+handleClick();
