@@ -1,5 +1,4 @@
-import { resetCalculator } from "./utils.js";
-import { createButton, operate } from "./utils.js";
+import { createButton } from "./utils.js";
 
 const root = document.querySelector("#root");
 
@@ -102,3 +101,32 @@ buttonsContainer.appendChild(secondRow);
 buttonsContainer.appendChild(thirdRow);
 buttonsContainer.appendChild(fourthRow);
 buttonsContainer.appendChild(fifthRow);
+
+// ================================================================ //
+
+let firstNumber;
+let operation;
+let secondNumber;
+
+function add(num1, num2) {
+  return Number(num1) + Number(num2);
+}
+
+function subtract(num1, num2) {
+  return Number(num1) - Number(num2);
+}
+
+function multiply(num1, num2) {
+  return Number(num1) * Number(num2);
+}
+
+function divide(num1, num2) {
+  if (num1 == 0 || num2 == 0) {
+    throw new Error("Cannot divide by zero!");
+  }
+  return Number(num1) / Number(num2);
+}
+
+function operate(operator, num1, num2) {
+  return operator(num1, num2);
+}
