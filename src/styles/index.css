@@ -49,8 +49,8 @@ body {
   background-color: var(--clr-gray-dark);
   border-radius: 10px;
 }
-  
-.content__display__text {    
+
+.content__display__text {
   font-size: 3rem;
   font-family: sans-serif;
   color: var(--clr-gray-light);
@@ -67,7 +67,7 @@ body {
   justify-content: space-between;
   gap: 0.7rem;
 }
-  
+
 .btn {
   cursor: pointer;
   border: none;
@@ -75,10 +75,10 @@ body {
   font-size: 1.5rem;
   color: var(--clr-gray-dark);
 }
-  
-.btn:not(#equals) {
+
+.btn:not(#wide) {
   aspect-ratio: 1 / 1;
-  flex: 1 1 25%; 
+  flex: 1 1 25%;
   border-radius: 50%;
 }
 
@@ -86,7 +86,7 @@ body {
   background-color: var(--clr-hover);
 }
 
-#equals {
+#wide {
   border-radius: 100px;
   flex-basis: calc(50% + 1.1rem);
 }

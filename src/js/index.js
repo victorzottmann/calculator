@@ -31,7 +31,7 @@ const acBtn = createButton("AC", ["btn", "btn-operation"]);
 const delBtn = createButton("DEL", ["btn", "btn-operation"]);
 const plusMinusBtn = createButton("±", ["btn", "btn-operation"]);
 const divideBtn = createButton("÷", ["btn", "btn-operation"]);
-divideBtn.dataset.operator = "÷";
+divideBtn.dataset.operation = "divide";
 
 firstRow.appendChild(acBtn);
 firstRow.appendChild(delBtn);
@@ -49,7 +49,7 @@ eightBtn.dataset.number = "8";
 const nineBtn = createButton("9", "btn");
 nineBtn.dataset.number = "9";
 const timesBtn = createButton("x", ["btn", "btn-operation"]);
-timesBtn.dataset.operator = "*";
+timesBtn.dataset.operation = "multiply";
 
 secondRow.appendChild(sevenBtn);
 secondRow.appendChild(eightBtn);
@@ -67,7 +67,7 @@ fiveBtn.dataset.number = "5";
 const sixBtn = createButton("6", "btn");
 sixBtn.dataset.number = "6";
 const minusBtn = createButton("-", ["btn", "btn-operation"]);
-minusBtn.dataset.operator = "-";
+minusBtn.dataset.operation = "subtract";
 
 thirdRow.appendChild(fourBtn);
 thirdRow.appendChild(fiveBtn);
@@ -85,7 +85,7 @@ twoBtn.dataset.number = "2";
 const threeBtn = createButton("3", "btn");
 threeBtn.dataset.number = "3";
 const plusBtn = createButton("+", ["btn", "btn-operation"]);
-plusBtn.dataset.operator = "+";
+plusBtn.dataset.operation = "add";
 
 fourthRow.appendChild(oneBtn);
 fourthRow.appendChild(twoBtn);
@@ -96,10 +96,11 @@ fourthRow.appendChild(plusBtn);
 const fifthRow = document.createElement("div");
 fifthRow.classList.add("content__buttons__row");
 
-const zeroBtn = createButton("0", "btn", "equals");
+const zeroBtn = createButton("0", "btn", "wide");
+zeroBtn.dataset.number = "0";
 const dotBtn = createButton(".", "btn");
 const equalsBtn = createButton("=", ["btn", "btn-operation"]);
-equalsBtn.dataset.operator = "=";
+equalsBtn.dataset.operation = "equals";
 
 fifthRow.appendChild(zeroBtn);
 fifthRow.appendChild(dotBtn);
@@ -113,19 +114,18 @@ buttonsContainer.appendChild(fifthRow);
 
 // ================================================================ //
 
-let operation;
-
 const data = {
-  firstNumber: null,
-  secondNumber: null,
+  firstNumber: "",
+  secondNumber: "",
   operator: {
     type: "",
     clicked: false,
   },
+  equalsClicked: false,
   result: "",
 }
 
-function handleClick() {
+function handleNumberClicks() {
   const numberButtons = document.querySelectorAll("[data-number]");
 
   numberButtons.forEach(btn => {
@@ -142,13 +142,16 @@ function handleClick() {
       }
     });
   });
+}
 
-  const operationButtons = document.querySelectorAll("[data-operator]");
+function handleOperationClicks() {
+  const operationButtons = document.querySelectorAll("[data-operation]");
+
   operationButtons.forEach(btn => {
     btn.addEventListener("click", (e) => {
       let operator = e.target.textContent;
 
-      if (data.firstNumber && !data.operator.clicked) {
+      if (data.firstNumber.length > 0 && !data.operator.clicked) {
         data.operator.type = operator;
         data.operator.clicked = true;
         console.log("Operator:", data.operator.type);
@@ -157,4 +160,51 @@ function handleClick() {
   });
 }
 
-handleClick();
+function operate(operator, firstNumber, secondNumber) {
+  let num1 = Number(firstNumber);
+  let num2 = Number(secondNumber);
+
+  switch (operator) {
+    case '+':
+      return num1 + num2;
+    case "-":
+      return num1 - num2;
+    case "*":
+      return num1 * num2;
+    case "/":
+      if (num1 == 0 || num2 == 0) {
+        throw new Error("Cannot divide by zero!");
+      }
+      return num1 / num2;
+    default:
+      return "Invalid operator!";
+  }
+}
+
+function handleEquals() {
+  equalsBtn.addEventListener("click", () => {
+
+    if (data.firstNumber && data.secondNumber && data.operator.type) {
+      data.result = operate(data.operator.type, data.firstNumber, data.secondNumber);
+      console.log("Result:", data.result);
+    } else {
+      console.log("Invalid calculation");
+    }
+  });
+}
+
+function clearCalcutator() {
+  acBtn.addEventListener("click", () => {
+    data.firstNumber = "";
+    data.secondNumber = "";
+    data.operator.type = "";
+    data.operator.clicked = false;
+    data.result = "";
+    console.clear();
+  })
+}
+
+handleNumberClicks();
+handleOperationClicks();
+handleEquals();
+clearCalcutator();
