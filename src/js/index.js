@@ -48,7 +48,7 @@ const eightBtn = createButton("8", "btn");
 eightBtn.dataset.number = "8";
 const nineBtn = createButton("9", "btn");
 nineBtn.dataset.number = "9";
-const timesBtn = createButton("x", ["btn", "btn-operation"]);
+const timesBtn = createButton("*", ["btn", "btn-operation"]);
 timesBtn.dataset.operation = "multiply";
 
 secondRow.appendChild(sevenBtn);
@@ -183,10 +183,11 @@ function operate(operator, firstNumber, secondNumber) {
 
 function handleEquals() {
   equalsBtn.addEventListener("click", () => {
+    let { firstNumber, secondNumber, operator, result } = data;
 
-    if (data.firstNumber && data.secondNumber && data.operator.type) {
-      data.result = operate(data.operator.type, data.firstNumber, data.secondNumber);
-      console.log("Result:", data.result);
+    if (firstNumber && secondNumber && operator.type) {
+      result = operate(operator.type, firstNumber, secondNumber);
+      console.log("Result:", result);
     } else {
       console.log("Invalid calculation");
     }
