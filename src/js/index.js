@@ -1,16 +1,5 @@
-import { createButton } from "./utils.js";
-
-const data = {
-  firstNumber: "0",
-  secondNumber: "",
-  operator: {
-    type: "",
-    clicked: false,
-  },
-  initialFirstNumberClick: false,
-  equalsClicked: false,
-  result: "",
-}
+import { createButton, operate, clearCalcutator } from "./utils.js";
+import { data } from "./data.js";
 
 const root = document.querySelector("#root");
 
@@ -167,27 +156,6 @@ function handleOperationClicks() {
   });
 }
 
-function operate(operator, firstNumber, secondNumber) {
-  let num1 = Number(firstNumber);
-  let num2 = Number(secondNumber);
-
-  switch (operator) {
-    case '+':
-      return num1 + num2;
-    case "-":
-      return num1 - num2;
-    case "*":
-      return num1 * num2;
-    case "/":
-      if (num1 == 0 || num2 == 0) {
-        throw new Error("Cannot divide by zero!");
-      }
-      return num1 / num2;
-    default:
-      return "Invalid operator!";
-  }
-}
-
 function handleEquals() {
   equalsBtn.addEventListener("click", () => {
     let { firstNumber, secondNumber, operator, result } = data;
@@ -201,20 +169,7 @@ function handleEquals() {
   });
 }
 
-function clearCalcutator() {
-  acBtn.addEventListener("click", () => {
-    displayText.textContent = "0";
-    data.firstNumber = 0;
-    data.firstNumberClickedFirstTime = false;
-    data.secondNumber = "";
-    data.operator.type = "";
-    data.operator.clicked = false;
-    data.result = "";
-    console.clear();
-  });
-}
-
 handleNumberClicks();
 handleOperationClicks();
 handleEquals();
-clearCalcutator();
+clearCalcutator(acBtn, data);
