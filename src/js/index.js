@@ -1,5 +1,17 @@
 import { createButton } from "./utils.js";
 
+const data = {
+  firstNumber: "0",
+  secondNumber: "",
+  operator: {
+    type: "",
+    clicked: false,
+  },
+  initialFirstNumberClick: false,
+  equalsClicked: false,
+  result: "",
+}
+
 const root = document.querySelector("#root");
 
 const calculator = document.createElement("div");
@@ -16,7 +28,7 @@ content.appendChild(display);
 
 let displayText = document.createElement("span");
 displayText.classList.add("content__display__text");
-displayText.textContent = "0";
+displayText.textContent = data.firstNumber;
 display.appendChild(displayText);
 
 const buttonsContainer = document.createElement("div");
@@ -99,6 +111,7 @@ fifthRow.classList.add("content__buttons__row");
 const zeroBtn = createButton("0", "btn", "wide");
 zeroBtn.dataset.number = "0";
 const dotBtn = createButton(".", "btn");
+dotBtn.dataset.number = ".";
 const equalsBtn = createButton("=", ["btn", "btn-operation"]);
 equalsBtn.dataset.operation = "equals";
 
@@ -114,17 +127,6 @@ buttonsContainer.appendChild(fifthRow);
 
 // ================================================================ //
 
-const data = {
-  firstNumber: "",
-  secondNumber: "",
-  operator: {
-    type: "",
-    clicked: false,
-  },
-  equalsClicked: false,
-  result: "",
-}
-
 function handleNumberClicks() {
   const numberButtons = document.querySelectorAll("[data-number]");
 
@@ -133,12 +135,17 @@ function handleNumberClicks() {
       let number = e.target.textContent;
 
       if (!data.operator.clicked) {
+        if (!data.firstNumber.clickedFirstTime) {
+          data.initialFirstNumberClick = true;
+          data.firstNumber = "";
+          displayText.textContent = "";
+        }
         data.firstNumber += number;
-        console.log("First number:", data.firstNumber);
+        displayText.textContent += data.firstNumber;
       } else {
         data.operator.clicked = true;
         data.secondNumber += number;
-        console.log("Second number:", data.secondNumber);
+        displayText.textContent += data.secondNumber;
       }
     });
   });
@@ -154,7 +161,7 @@ function handleOperationClicks() {
       if (data.firstNumber.length > 0 && !data.operator.clicked) {
         data.operator.type = operator;
         data.operator.clicked = true;
-        console.log("Operator:", data.operator.type);
+        displayText.textContent += operator;
       }
     });
   });
@@ -187,7 +194,7 @@ function handleEquals() {
 
     if (firstNumber && secondNumber && operator.type) {
       result = operate(operator.type, firstNumber, secondNumber);
-      console.log("Result:", result);
+      displayText.textContent = result;
     } else {
       console.log("Invalid calculation");
     }
@@ -196,13 +203,15 @@ function handleEquals() {
 
 function clearCalcutator() {
   acBtn.addEventListener("click", () => {
-    data.firstNumber = "";
+    displayText.textContent = "0";
+    data.firstNumber = 0;
+    data.firstNumberClickedFirstTime = false;
     data.secondNumber = "";
     data.operator.type = "";
     data.operator.clicked = false;
     data.result = "";
     console.clear();
-  })
+  });
 }
 
 handleNumberClicks();
