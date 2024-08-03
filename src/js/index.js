@@ -169,7 +169,17 @@ function handleEquals() {
   });
 }
 
+function deleteEntry() {
+  delBtn.addEventListener("click", () => {
+    displayText.textContent = displayText.textContent.slice(0, -1);
+    if (!displayText.textContent) {
+      displayText.textContent = "0";
+    }
+  });
+}
+
 handleNumberClicks();
 handleOperationClicks();
 handleEquals();
 clearCalcutator(acBtn, data);
+deleteEntry();
