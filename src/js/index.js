@@ -1,4 +1,4 @@
-import { createButton, operate, clearCalcutator } from "./utils.js";
+import { createButton, operate } from "./utils.js";
 import { data } from "./data.js";
 
 const root = document.querySelector("#root");
@@ -124,17 +124,17 @@ function handleNumberClicks() {
       let number = e.target.textContent;
 
       if (!data.operator.clicked) {
-        if (!data.firstNumber.clickedFirstTime) {
+        if (!data.initialFirstNumberClick) {
           data.initialFirstNumberClick = true;
           data.firstNumber = "";
           displayText.textContent = "";
         }
         data.firstNumber += number;
-        displayText.textContent += data.firstNumber;
+        displayText.textContent += number;
       } else {
         data.operator.clicked = true;
         data.secondNumber += number;
-        displayText.textContent += data.secondNumber;
+        displayText.textContent += number;
       }
     });
   });
@@ -163,17 +163,33 @@ function handleEquals() {
     if (firstNumber && secondNumber && operator.type) {
       result = operate(operator.type, firstNumber, secondNumber);
       displayText.textContent = result;
+      data.equalsClicked = true;
     } else {
       console.log("Invalid calculation");
     }
   });
 }
 
+function clearCalcutator() {
+  acBtn.addEventListener("click", () => {
+    displayText.textContent = "0";
+    data.firstNumber = 0;
+    data.initialFirstNumberClick = false;
+    data.secondNumber = "";
+    data.operator.clicked = false;
+    data.operator.type = "";
+    data.result = "";
+  });
+}
+
 function deleteEntry() {
   delBtn.addEventListener("click", () => {
-    displayText.textContent = displayText.textContent.slice(0, -1);
-    if (!displayText.textContent) {
-      displayText.textContent = "0";
+    if (!data.equalsClicked) {
+      displayText.textContent = displayText.textContent.slice(0, -1);
+
+      if (displayText.textContent.length == 0) {
+        displayText.textContent = "0";
+      }
     }
   });
 }
@@ -181,5 +197,5 @@ function deleteEntry() {
 handleNumberClicks();
 handleOperationClicks();
 handleEquals();
-clearCalcutator(acBtn, data);
 deleteEntry();
+clearCalcutator();

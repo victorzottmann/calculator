@@ -37,16 +37,3 @@ export function operate(operator, firstNumber, secondNumber) {
       return "Invalid operator!";
   }
 }
-
-export function clearCalcutator(button, data) {
-  button.addEventListener("click", () => {
-    displayText.textContent = "0";
-    data.firstNumber = 0;
-    data.firstNumberClickedFirstTime = false;
-    data.secondNumber = "";
-    data.operator.type = "";
-    data.operator.clicked = false;
-    data.result = "";
-    console.clear();
-  });
-}
