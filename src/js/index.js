@@ -1,5 +1,6 @@
 const buttons = document.querySelectorAll(".btn");
-const displayText = document.querySelector(".content__display__text");
+const input = document.querySelector(".content__display__text");
+input.value = 0;
 
 let state = {
   num1: "",
@@ -14,6 +15,7 @@ const operations = {
   subtract: (a, b) => a - b,
   multiply: (a, b) => a * b,
   divide: (a, b) => (a === 0 || b === 0 ? 0 : a / b),
+  percentage: (a) => a / 100,
 };
 
 const operationsMap = new Map([
@@ -36,7 +38,7 @@ function clearState() {
     operatorClicked: false,
     result: "",
   };
-  displayText.textContent = "0";
+  input.value = "0";
 }
 
 function showResult() {
@@ -46,61 +48,82 @@ function showResult() {
       Number(state.num1),
       Number(state.num2)
     ).toString();
-    displayText.textContent = state.result;
+    input.value = state.result;
+  }
+}
+
+function calculatePercentage() {
+  const percentage = operations.percentage(Number(state.num1)).toString();
+
+  if (state.num1) {
+    state.num1 = state.result;
+    state.num2 = "";
+    state.operator = "";
+    state.operatorClicked = false;
+    state.result = percentage;
+    input.value = state.result;
+  }
+}
+
+function handleDelete() {
+  if (input.value.length > 1) {
+    input.value = input.value.slice(0, -1);
+  } else {
+    input.value = "0";
+  }
+
+  if (!state.operatorClicked) {
+    state.num1 = state.num1.slice(0, -1);
+  } else {
+    state.num2 = state.num2.slice(0, -1);
   }
 }
 
 buttons.forEach((b) => {
   b.addEventListener("click", (e) => {
-    let value = e.target.textContent;
+    let btnValue = e.target.textContent;
 
-    if (state.result && value !== "AC") {
+    if (state.result && btnValue !== "AC") {
       return;
     }
 
-    if (value === "AC") {
+    if (btnValue === "AC") {
       clearState();
       return;
     }
 
-    if (value === "=") {
+    if (btnValue === "%") {
+      calculatePercentage();
+      return;
+    }
+
+    if (btnValue === "=") {
       showResult();
       return;
     }
 
-    if (value === "DEL") {
-      if (displayText.textContent.length > 1) {
-        displayText.textContent = displayText.textContent.slice(0, -1);
-      } else {
-        displayText.textContent = "0";
-      }
-
-      if (!state.operatorClicked) {
-        state.num1 = state.num1.slice(0, -1);
-      } else {
-        state.num2 = state.num2.slice(0, -1);
-      }
-
+    if (btnValue === "DEL") {
+      handleDelete();
       return;
     }
 
-    if (operationsMap.has(value)) {
-      state.operator = operationsMap.get(value);
+    if (operationsMap.has(btnValue)) {
+      state.operator = operationsMap.get(btnValue);
       state.operatorClicked = true;
-      displayText.textContent += `${value}`;
-      value = "";
+      input.value += btnValue;
+      btnValue = "";
     }
 
     if (!state.operatorClicked) {
-      state.num1 += value;
+      state.num1 += btnValue;
     } else {
-      state.num2 += value;
+      state.num2 += btnValue;
     }
 
-    if (displayText.textContent === "0") {
-      displayText.textContent = value;
+    if (input.value === "0") {
+      input.value = btnValue;
     } else {
-      displayText.textContent += value;
+      input.value += btnValue;
     }
   });
 });

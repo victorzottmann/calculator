@@ -43,7 +43,6 @@ body {
 
 .content__display {
   display: flex;
-  justify-content: flex-end;
   align-items: flex-end;
   height: 10rem;
   padding: 0.5rem 1rem;
@@ -55,6 +54,10 @@ body {
   font-size: 3rem;
   font-family: sans-serif;
   color: var(--clr-gray-light);
+  background-color: var(--clr-gray-dark);
+  border: none;
+  width: 100%;
+  text-align: right;
 }
 
 .content__buttons {
