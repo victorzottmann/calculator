@@ -27,7 +27,7 @@ body {
 
 .calculator {
   width: var(--wd-calculator);
-  height: var(--ht-calculator);
+  /* height: var(--ht-calculator); */
   border-radius: 15px;
   background-color: var(--clr-teal);
   padding: var(--pd-calculator);
@@ -72,6 +72,13 @@ body {
   gap: 0.7rem;
 }
 
+.content__copyright {
+  text-align: center;
+  font-family: sans-serif;
+  font-weight: 600;
+  color: var(--clr-gray-dark);
+}
+
 .btn {
   cursor: pointer;
   border: none;
@@ -79,6 +86,8 @@ body {
   font-size: 1.5rem;
   color: var(--clr-gray-dark);
 }
+
+
 
 .btn:not(#wide) {
   aspect-ratio: 1 / 1;
