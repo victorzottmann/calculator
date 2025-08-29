@@ -68,10 +68,26 @@ buttons.forEach((b) => {
       return;
     }
 
+    if (value === "DEL") {
+      if (displayText.textContent.length > 1) {
+        displayText.textContent = displayText.textContent.slice(0, -1);
+      } else {
+        displayText.textContent = "0";
+      }
+
+      if (!state.operatorClicked) {
+        state.num1 = state.num1.slice(0, -1);
+      } else {
+        state.num2 = state.num2.slice(0, -1);
+      }
+
+      return;
+    }
+
     if (operationsMap.has(value)) {
       state.operator = operationsMap.get(value);
       state.operatorClicked = true;
-      displayText.textContent += ` ${value} `;
+      displayText.textContent += `${value}`;
       value = "";
     }
 
@@ -86,7 +102,5 @@ buttons.forEach((b) => {
     } else {
       displayText.textContent += value;
     }
-
-    console.log(state);
   });
 });
