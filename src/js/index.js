@@ -48,7 +48,7 @@ function showResult() {
   }
 }
 
-function calculatePercentage() {
+function handlePercentage() {
   const percentage = operations.percentage(+state.num1).toString();
 
   if (state.num1) {
@@ -88,18 +88,18 @@ buttons.forEach((b) => {
       return;
     }
 
+    if (btnValue === "DEL") {
+      handleDelete();
+      return;
+    }
+
     if (btnValue === "%") {
-      calculatePercentage();
+      handlePercentage();
       return;
     }
 
     if (btnValue === "=") {
       showResult();
-      return;
-    }
-
-    if (btnValue === "DEL") {
-      handleDelete();
       return;
     }
 
