@@ -43,17 +43,13 @@ function clearState() {
 
 function showResult() {
   if (state.num1 && state.num2 && state.operator) {
-    state.result = operate(
-      state.operator,
-      Number(state.num1),
-      Number(state.num2)
-    ).toString();
+    state.result = operate(state.operator, +state.num1, +state.num2).toString();
     input.value = state.result;
   }
 }
 
 function calculatePercentage() {
-  const percentage = operations.percentage(Number(state.num1)).toString();
+  const percentage = operations.percentage(+state.num1).toString();
 
   if (state.num1) {
     state.num1 = state.result;
