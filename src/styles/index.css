@@ -27,6 +27,7 @@ body {
 
 .calculator {
   width: var(--wd-calculator);
+  height: var(--ht-calculator);
   border-radius: 15px;
   background-color: var(--clr-teal);
   padding: var(--pd-calculator);
