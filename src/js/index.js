@@ -75,11 +75,33 @@ function handleDelete() {
   }
 }
 
+function handleNegative() {
+  if (!state.operatorClicked) {
+    state.num1 = "-";
+  } else {
+    state.num2 = "-";
+  }
+
+  if (input.value === "0") {
+    input.value = "-";
+  } else {
+    input.value += "-";
+  }
+}
+
 buttons.forEach((b) => {
   b.addEventListener("click", (e) => {
     let btnValue = e.target.textContent;
 
-    if (state.result && btnValue !== "AC") {
+    const isFirstAndEmpty = !state.operatorClicked && state.num1 === "";
+    const isSecondAndEmpty = state.operatorClicked && state.num2 === "";
+
+    if (state.result && btnValue !== "AC" && btnValue !== "=") {
+      return;
+    }
+
+    if (btnValue === "-" && (isFirstAndEmpty || isSecondAndEmpty)) {
+      handleNegative();
       return;
     }
 
